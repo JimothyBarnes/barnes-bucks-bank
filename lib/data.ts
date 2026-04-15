@@ -74,8 +74,19 @@ export type RedemptionSummary = {
   rewardCost: number;
 };
 
-const dataDir = path.join(process.cwd(), "data");
-const databasePath = path.join(dataDir, "barnes-bucks.db");
+function resolveDatabasePath() {
+  const configuredPath = process.env.BARNES_BUCKS_DB_PATH?.trim();
+  if (configuredPath) {
+    return path.isAbsolute(configuredPath)
+      ? configuredPath
+      : path.join(process.cwd(), configuredPath);
+  }
+
+  return path.join(process.cwd(), "data", "barnes-bucks.db");
+}
+
+const databasePath = resolveDatabasePath();
+const dataDir = path.dirname(databasePath);
 
 if (!fs.existsSync(dataDir)) {
   fs.mkdirSync(dataDir, { recursive: true });

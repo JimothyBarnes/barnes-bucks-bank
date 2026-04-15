@@ -24,6 +24,7 @@
 .DS_Store
 *.pem
 /data/
+/data-preview/
 
 # debug
 npm-debug.log*

@@ -39,6 +39,24 @@ A small family banking app for tracking Barnes Bucks, posting jobs, approving pa
 
 The SQLite database will be created automatically at `data/barnes-bucks.db`.
 
+## Safe Preview Workflow
+
+Use this when you want to review changes locally without touching your normal local data.
+
+1. Start the preview app:
+
+   ```bash
+   npm run dev:preview
+   ```
+
+2. Open [http://localhost:3000](http://localhost:3000)
+
+3. Preview mode uses a separate database file:
+
+   `data-preview/barnes-bucks-preview.db`
+
+That gives you a safe place to click around, create test accounts, and try new features before anything gets pushed to GitHub and deployed to Render.
+
 ## Environment
 
 Create a `.env.local` file with:
