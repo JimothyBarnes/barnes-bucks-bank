@@ -45,11 +45,26 @@ export default async function AdminDashboardPage({ searchParams }: PageProps) {
       subtitle="Handle the daily banking work: balances, quick adjustments, approvals, and recent activity."
       message={message}
     >
-      <div className="mb-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        <Stat label="Active Accounts" value={String(activeKids.length)} detail="Kid accounts ready to use" />
-        <Stat label="Total Circulation" value={formatBucks(totalBucks)} detail="Combined balance across active kid accounts" tone="gold" />
-        <Stat label="Jobs Waiting" value={String(pendingJobs.length)} detail="Submitted jobs ready for review" />
-        <Stat label="Reward Requests" value={String(pendingRewards.length)} detail="Rewards waiting for approval" tone="green" />
+      <div className="mb-8 grid gap-6 xl:grid-cols-[1.05fr_0.95fr]">
+        <section className="relative overflow-hidden rounded-[2rem] border border-[rgba(255,255,255,0.14)] bg-[linear-gradient(160deg,#0b2340_0%,#123a68_48%,#8a6510_162%)] p-6 text-white shadow-[0_28px_70px_rgba(10,28,52,0.26)]">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.14),transparent_34%),linear-gradient(135deg,transparent_0%,rgba(255,255,255,0.04)_48%,transparent_100%)]" />
+          <div className="relative">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.34em] text-white/72">Daily Banking</p>
+            <h2 className="mt-5 max-w-xl text-[2.55rem] font-semibold leading-[0.98] tracking-[-0.04em]">
+              Keep the family bank moving with confidence.
+            </h2>
+            <p className="mt-4 max-w-2xl text-[15px] leading-8 text-white/76">
+              Review balances, move Barnes Bucks, and clear approvals from one polished control room.
+            </p>
+          </div>
+        </section>
+
+        <section className="grid gap-4 sm:grid-cols-2">
+          <Stat label="Active Accounts" value={String(activeKids.length)} detail="Kid accounts ready to use" />
+          <Stat label="Total Circulation" value={formatBucks(totalBucks)} detail="Combined balance across active kid accounts" tone="gold" />
+          <Stat label="Jobs Waiting" value={String(pendingJobs.length)} detail="Submitted jobs ready for review" />
+          <Stat label="Reward Requests" value={String(pendingRewards.length)} detail="Rewards waiting for approval" tone="green" />
+        </section>
       </div>
 
       <div className="mb-6 grid gap-6 xl:grid-cols-[0.92fr_1.08fr]">

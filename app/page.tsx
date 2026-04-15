@@ -397,36 +397,37 @@ function KidDashboard({
         <button className={ghostButtonClass}>Sign Out</button>
       </form>
 
-      <div className="mb-6 grid gap-4 xl:grid-cols-[1.3fr_0.7fr]">
-        <section className="rounded-[1.9rem] border border-[rgba(18,58,104,0.14)] bg-[linear-gradient(140deg,rgba(18,58,104,0.12),rgba(255,255,255,0.86)_55%,rgba(200,159,52,0.12))] p-6 shadow-[0_24px_80px_rgba(18,58,104,0.1)]">
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+      <div className="mb-8 grid gap-6 xl:grid-cols-[1.02fr_0.98fr]">
+        <section className="relative overflow-hidden rounded-[2rem] border border-[rgba(255,255,255,0.14)] bg-[linear-gradient(160deg,#0b2340_0%,#123a68_48%,#8a6510_162%)] p-6 text-white shadow-[0_28px_70px_rgba(10,28,52,0.26)]">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.14),transparent_34%),linear-gradient(135deg,transparent_0%,rgba(255,255,255,0.04)_48%,transparent_100%)]" />
+          <div className="relative flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-2xl">
-              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--muted)]">Account Home</p>
-              <div className="mt-4 flex items-center gap-4">
-                <div className="flex h-20 w-20 items-center justify-center rounded-[1.8rem] bg-[var(--navy)] text-3xl font-semibold text-white shadow-[0_16px_34px_rgba(18,58,104,0.22)]">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.34em] text-white/72">Account Home</p>
+              <div className="mt-5 flex items-center gap-4">
+                <div className="flex h-20 w-20 items-center justify-center rounded-[1.8rem] border border-white/14 bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,0.22),rgba(255,255,255,0.08)_40%,transparent_72%)] text-3xl font-semibold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]">
                   {kid.avatar}
                 </div>
                 <div>
-                  <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">{kid.name}</h2>
-                  <p className="mt-2 max-w-xl text-sm leading-7 text-[var(--muted)] sm:text-base">
-                    This is your account home. Check your Barnes Bucks, pick your next job, and cash in rewards when you are ready.
+                  <h2 className="text-[2.8rem] font-semibold leading-[0.98] tracking-[-0.04em]">{kid.name}</h2>
+                  <p className="mt-3 max-w-xl text-[15px] leading-8 text-white/76">
+                    Step into your Barnes Bucks vault, review your balance, and decide what to earn, save, send, or redeem next.
                   </p>
                 </div>
               </div>
             </div>
-            <div className="min-w-[220px] rounded-[1.6rem] border border-[rgba(18,58,104,0.14)] bg-white/85 px-5 py-4 shadow-[0_14px_36px_rgba(18,58,104,0.08)]">
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--muted)]">Available Balance</p>
-              <p className="mt-3 text-4xl font-semibold text-[var(--navy)]">{formatBucks(kid.balance)}</p>
-              <p className="mt-2 text-sm text-[var(--muted)]">Ready to spend, save, send, or use on rewards.</p>
+            <div className="min-w-[240px] rounded-[1.6rem] border border-white/14 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03))] px-5 py-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-white/60">Available Balance</p>
+              <p className="mt-3 text-4xl font-semibold text-white">{formatBucks(kid.balance)}</p>
+              <p className="mt-2 text-sm text-white/74">Ready to spend, save, send, or use on rewards.</p>
             </div>
           </div>
         </section>
 
-        <div className="grid gap-4 sm:grid-cols-3 xl:grid-cols-1">
+        <section className="grid gap-4 sm:grid-cols-3 xl:grid-cols-1">
           <Stat label="Jobs In Progress" value={String(myClaimedJobs.length)} detail="Claimed or waiting for approval" />
           <Stat label="Reward Requests" value={String(pendingRequests.length)} detail="Requests pending approval" tone="green" />
           <Stat label="Rewards You Can Afford" value={String(availableRewards)} detail="Ready to request right now" tone="gold" />
-        </div>
+        </section>
       </div>
 
       <div className="grid gap-6 xl:grid-cols-[1.08fr_0.92fr]">

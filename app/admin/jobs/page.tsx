@@ -40,7 +40,20 @@ export default async function AdminJobsPage({ searchParams }: PageProps) {
       subtitle="Post work, review submissions, and keep job and reward approvals moving."
       message={message}
     >
-      <div className="mb-6">
+      <div className="mb-8 grid gap-6 xl:grid-cols-[1.05fr_0.95fr]">
+        <section className="relative overflow-hidden rounded-[2rem] border border-[rgba(255,255,255,0.14)] bg-[linear-gradient(160deg,#0b2340_0%,#123a68_48%,#8a6510_162%)] p-6 text-white shadow-[0_28px_70px_rgba(10,28,52,0.26)]">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.14),transparent_34%),linear-gradient(135deg,transparent_0%,rgba(255,255,255,0.04)_48%,transparent_100%)]" />
+          <div className="relative">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.34em] text-white/72">Work Queue</p>
+            <h2 className="mt-5 max-w-xl text-[2.55rem] font-semibold leading-[0.98] tracking-[-0.04em]">
+              Approvals and jobs in one disciplined queue.
+            </h2>
+            <p className="mt-4 max-w-2xl text-[15px] leading-8 text-white/76">
+              Post new work, review submitted chores, and keep reward approvals moving without losing the thread.
+            </p>
+          </div>
+        </section>
+
         <Card title="Today&apos;s Queue">
           <div className="grid gap-4 md:grid-cols-3">
             <div className="rounded-[1.25rem] border border-[var(--line)] bg-[var(--panel-strong)] p-4">

@@ -108,34 +108,68 @@ export function AdminShell({
   ] as const;
 
   return (
-    <Shell title={title} subtitle={subtitle} message={message}>
-      <div className="mb-6 flex flex-col gap-4 rounded-[1.5rem] border border-[var(--line)] bg-[linear-gradient(145deg,rgba(18,58,104,0.06),rgba(255,255,255,0.82))] px-4 py-4 shadow-[0_18px_50px_rgba(18,58,104,0.08)] lg:flex-row lg:items-center lg:justify-between">
-        <nav className="grid gap-3 sm:grid-cols-3">
-          {navItems.map((item) => (
-            <Link
-              key={item.key}
-              href={item.href}
-              className={`rounded-[1.25rem] border px-4 py-3 transition ${
-                item.key === activeTab
-                  ? "border-[rgba(18,58,104,0.28)] bg-[var(--navy)] text-white shadow-[0_16px_36px_rgba(18,58,104,0.2)]"
-                  : "border-[var(--line)] bg-white text-[var(--ink)] hover:border-[var(--navy)]"
-              }`}
-            >
-              <span className="block text-base font-semibold">{item.label}</span>
-              <span
-                className={`mt-1 block text-xs uppercase tracking-[0.18em] ${
-                  item.key === activeTab ? "text-white/75" : "text-[var(--muted)]"
-                }`}
-              >
-                {item.detail}
-              </span>
-            </Link>
-          ))}
-        </nav>
-        <form action={logoutAction} className="lg:shrink-0">
-          <button className={ghostButtonClass}>Sign Out</button>
-        </form>
+    <Shell title={title} subtitle={subtitle} message={message} compactHeader>
+      <div className="mb-8 grid gap-6 xl:grid-cols-[0.9fr_1.1fr]">
+        <section className="relative overflow-hidden rounded-[2.1rem] border border-[rgba(255,255,255,0.14)] bg-[linear-gradient(160deg,#0b2340_0%,#123a68_46%,#8a6510_158%)] p-6 text-white shadow-[0_30px_80px_rgba(10,28,52,0.28)]">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.14),transparent_34%),linear-gradient(135deg,transparent_0%,rgba(255,255,255,0.04)_48%,transparent_100%)]" />
+          <div className="relative flex h-full flex-col justify-between gap-8">
+            <div>
+              <div className="flex items-center justify-between gap-4">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.34em] text-white/72">Barnes Bucks Bank</p>
+                <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-white/52">Admin Console</p>
+              </div>
+              <div className="mt-8 flex items-center gap-5">
+                <div className="flex h-18 w-18 items-center justify-center rounded-full border border-white/18 bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,0.24),rgba(255,255,255,0.08)_40%,transparent_72%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.28)]">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[rgba(255,255,255,0.2)] text-base font-semibold tracking-[0.22em] text-white/92">
+                    BK
+                  </div>
+                </div>
+                <div className="h-px flex-1 bg-[linear-gradient(90deg,rgba(255,255,255,0.24),transparent)]" />
+              </div>
+              <h1 className="mt-8 max-w-md text-[2.8rem] font-semibold leading-[0.98] tracking-[-0.04em]">{title}</h1>
+              <p className="mt-4 max-w-xl text-[15px] leading-8 text-white/76">{subtitle}</p>
+            </div>
+          </div>
+        </section>
+
+        <section className="rounded-[2.1rem] border border-[rgba(18,58,104,0.12)] bg-[linear-gradient(180deg,rgba(255,255,255,0.97),rgba(250,245,236,0.96))] p-3 shadow-[0_26px_70px_rgba(18,58,104,0.12)]">
+          <div className="rounded-[1.65rem] border border-[rgba(18,58,104,0.1)] bg-[linear-gradient(180deg,rgba(255,255,255,0.94),rgba(255,252,246,0.88))] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.85)]">
+            <div className="mb-4 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+              <div>
+                <p className="text-[11px] font-semibold uppercase tracking-[0.32em] text-[var(--gold-deep)]">Navigation</p>
+                <p className="mt-2 text-lg font-semibold tracking-tight text-[var(--ink)]">Administrative Workspaces</p>
+              </div>
+              <form action={logoutAction} className="lg:shrink-0">
+                <button className={ghostButtonClass}>Sign Out</button>
+              </form>
+            </div>
+
+            <div className="grid gap-3 sm:grid-cols-3">
+              {navItems.map((item) => (
+                <Link
+                  key={item.key}
+                  href={item.href}
+                  className={`rounded-[1.35rem] border px-4 py-4 transition ${
+                    item.key === activeTab
+                      ? "border-[rgba(18,58,104,0.2)] bg-[linear-gradient(180deg,#163f70,#0d2d52)] text-white shadow-[0_18px_36px_rgba(18,58,104,0.2),inset_0_1px_0_rgba(255,255,255,0.12)]"
+                      : "border-[rgba(18,58,104,0.1)] bg-[linear-gradient(180deg,rgba(255,255,255,0.94),rgba(248,243,235,0.9))] text-[var(--ink)] shadow-[0_10px_24px_rgba(18,58,104,0.06),inset_0_1px_0_rgba(255,255,255,0.8)] hover:border-[rgba(18,58,104,0.2)]"
+                  }`}
+                >
+                  <span className="block text-base font-semibold">{item.label}</span>
+                  <span
+                    className={`mt-2 block text-xs uppercase tracking-[0.2em] ${
+                      item.key === activeTab ? "text-white/74" : "text-[var(--muted)]"
+                    }`}
+                  >
+                    {item.detail}
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
       </div>
+
       {children}
     </Shell>
   );
@@ -152,11 +186,13 @@ export function Card({
 }) {
   return (
     <section
-      className="rounded-[1.75rem] border border-[var(--line)] bg-[var(--panel)] p-5 shadow-[0_18px_50px_rgba(18,58,104,0.08)] backdrop-blur"
+      className="rounded-[1.9rem] border border-[rgba(18,58,104,0.12)] bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(250,245,236,0.92))] p-3 shadow-[0_22px_60px_rgba(18,58,104,0.1)] backdrop-blur"
       style={accent ? { borderColor: accent } : undefined}
     >
-      <h2 className="mb-4 text-xl font-semibold tracking-tight">{title}</h2>
-      {children}
+      <div className="rounded-[1.45rem] border border-[rgba(18,58,104,0.08)] bg-[linear-gradient(180deg,rgba(255,255,255,0.94),rgba(255,252,246,0.88))] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.84)]">
+        <h2 className="mb-4 text-xl font-semibold tracking-tight">{title}</h2>
+        {children}
+      </div>
     </section>
   );
 }
