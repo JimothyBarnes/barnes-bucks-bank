@@ -252,7 +252,7 @@ function KidDashboard({
                 <EmptyState text="No open jobs right now. Check back later or post one." />
               ) : (
                 openJobs.map((job) => (
-                  <div key={job.id} className="rounded-[1.25rem] border border-[var(--line)] bg-[var(--panel-strong)] p-4">
+                  <div key={job.id} className="rounded-[1.25rem] border border-[var(--line)] bg-[var(--panel-strong)] p-4 shadow-[0_10px_24px_rgba(18,58,104,0.05)]">
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <div>
                         <p className="text-lg font-semibold">{job.title}</p>
@@ -278,7 +278,7 @@ function KidDashboard({
                 <EmptyState text="You do not have any claimed jobs yet." />
               ) : (
                 myClaimedJobs.map((job) => (
-                  <div key={job.id} className="rounded-[1.25rem] border border-[var(--line)] bg-[var(--panel-strong)] p-4">
+                  <div key={job.id} className="rounded-[1.25rem] border border-[var(--line)] bg-[var(--panel-strong)] p-4 shadow-[0_10px_24px_rgba(18,58,104,0.05)]">
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <div>
                         <p className="text-lg font-semibold">{job.title}</p>
@@ -307,9 +307,14 @@ function KidDashboard({
           <Card title="Rewards">
             <div className="grid gap-3">
               {rewards.map((reward) => (
-                <div key={reward.id} className="rounded-[1.25rem] border border-[var(--line)] bg-[var(--panel-strong)] p-4">
-                  <p className="text-lg font-semibold">{reward.title}</p>
-                  <p className="text-sm text-[var(--muted)]">{formatBucks(reward.cost)}</p>
+                <div key={reward.id} className="rounded-[1.25rem] border border-[var(--line)] bg-[var(--panel-strong)] p-4 shadow-[0_10px_24px_rgba(18,58,104,0.05)]">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <p className="text-lg font-semibold tracking-tight">{reward.title}</p>
+                      <p className="mt-1 text-sm text-[var(--muted)]">Reward cost</p>
+                    </div>
+                    <p className="text-xl font-semibold text-[var(--gold-deep)]">{formatBucks(reward.cost)}</p>
+                  </div>
                   {reward.description ? <p className="mt-2 text-sm">{reward.description}</p> : null}
                   <form action={redeemRewardAction} className="mt-3 grid gap-3">
                     <input type="hidden" name="rewardId" value={reward.id} />
@@ -330,9 +335,9 @@ function KidDashboard({
                 <EmptyState text="You have not requested any rewards yet." />
               ) : (
                 redemptions.map((request) => (
-                  <div key={request.id} className="rounded-[1.25rem] border border-[var(--line)] bg-[var(--panel-strong)] p-4">
-                    <p className="font-semibold">{request.rewardTitle}</p>
-                    <p className="text-sm text-[var(--muted)]">
+                  <div key={request.id} className="rounded-[1.25rem] border border-[var(--line)] bg-[var(--panel-strong)] p-4 shadow-[0_10px_24px_rgba(18,58,104,0.05)]">
+                    <p className="font-semibold tracking-tight">{request.rewardTitle}</p>
+                    <p className="mt-1 text-sm text-[var(--muted)]">
                       {titleCase(request.status)} - {formatBucks(request.rewardCost)}
                     </p>
                     {request.note ? <p className="mt-2 text-sm">{request.note}</p> : null}

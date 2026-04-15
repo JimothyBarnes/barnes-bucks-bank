@@ -6,19 +6,19 @@ import { formatBucks, formatDate, titleCase } from "@/lib/format";
 const isPreviewMode = Boolean(process.env.BARNES_BUCKS_DB_PATH);
 
 export const inputClass =
-  "w-full rounded-[1rem] border border-[var(--line)] bg-white px-4 py-3 text-[15px] outline-none transition focus:border-[var(--navy)] focus:ring-2 focus:ring-[rgba(18,58,104,0.16)]";
+  "w-full rounded-[1rem] border border-[var(--line)] bg-white px-4 py-3 text-[15px] text-[var(--ink)] shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] outline-none transition placeholder:text-[color:rgba(92,102,117,0.7)] focus:border-[var(--navy)] focus:ring-2 focus:ring-[rgba(18,58,104,0.16)]";
 
 export const primaryButtonClass =
-  "inline-flex items-center justify-center rounded-full bg-[var(--navy)] px-5 py-3 text-sm font-semibold text-white transition hover:brightness-110";
+  "inline-flex items-center justify-center rounded-full bg-[var(--navy)] px-5 py-3 text-sm font-semibold text-white shadow-[0_12px_24px_rgba(18,58,104,0.16)] transition hover:brightness-110";
 
 export const secondaryButtonClass =
-  "inline-flex items-center justify-center rounded-full bg-[var(--gold)] px-5 py-3 text-sm font-semibold text-[var(--ink)] transition hover:brightness-105";
+  "inline-flex items-center justify-center rounded-full bg-[var(--gold)] px-5 py-3 text-sm font-semibold text-[var(--ink)] shadow-[0_12px_24px_rgba(200,159,52,0.2)] transition hover:brightness-105";
 
 export const ghostButtonClass =
-  "inline-flex items-center justify-center rounded-full border border-[var(--line)] bg-white px-5 py-3 text-sm font-semibold text-[var(--ink)] transition hover:border-[var(--navy)]";
+  "inline-flex items-center justify-center rounded-full border border-[var(--line)] bg-white px-5 py-3 text-sm font-semibold text-[var(--ink)] shadow-[0_8px_20px_rgba(18,58,104,0.06)] transition hover:border-[var(--navy)]";
 
 export const dangerButtonClass =
-  "inline-flex items-center justify-center rounded-full bg-[var(--red)] px-5 py-3 text-sm font-semibold text-white transition hover:brightness-105";
+  "inline-flex items-center justify-center rounded-full bg-[var(--red)] px-5 py-3 text-sm font-semibold text-white shadow-[0_12px_24px_rgba(188,76,60,0.18)] transition hover:brightness-105";
 
 export const disabledButtonClass =
   "inline-flex items-center justify-center rounded-full bg-gray-300 px-5 py-3 text-sm font-semibold text-gray-600";
@@ -149,7 +149,7 @@ export function Card({
       className="rounded-[1.75rem] border border-[var(--line)] bg-[var(--panel)] p-5 shadow-[0_18px_50px_rgba(18,58,104,0.08)] backdrop-blur"
       style={accent ? { borderColor: accent } : undefined}
     >
-      <h2 className="mb-4 text-xl font-semibold">{title}</h2>
+      <h2 className="mb-4 text-xl font-semibold tracking-tight">{title}</h2>
       {children}
     </section>
   );
@@ -199,7 +199,7 @@ export function Field({
 
 export function EmptyState({ text }: { text: string }) {
   return (
-    <div className="rounded-[1.25rem] border border-dashed border-[var(--line)] bg-[rgba(255,255,255,0.55)] px-4 py-6 text-sm text-[var(--muted)]">
+    <div className="rounded-[1.25rem] border border-dashed border-[var(--line)] bg-[rgba(255,255,255,0.55)] px-4 py-6 text-sm leading-7 text-[var(--muted)]">
       {text}
     </div>
   );
@@ -217,24 +217,24 @@ export function LedgerRow({
   const tone = incoming ? "text-[var(--green)]" : "text-[var(--red)]";
 
   return (
-    <div className="rounded-[1.25rem] border border-[var(--line)] bg-[var(--panel-strong)] px-4 py-3">
+    <div className="rounded-[1.25rem] border border-[var(--line)] bg-[var(--panel-strong)] px-4 py-3 shadow-[0_10px_24px_rgba(18,58,104,0.05)]">
       <div className="flex items-start justify-between gap-4">
-        <div>
-          <p className="font-semibold">
+        <div className="min-w-0">
+          <p className="font-semibold tracking-tight">
             {titleCase(entry.type)}
             {entry.jobTitle ? ` - ${entry.jobTitle}` : ""}
             {entry.rewardTitle ? ` - ${entry.rewardTitle}` : ""}
           </p>
-          <p className="text-sm text-[var(--muted)]">
+          <p className="mt-1 text-sm text-[var(--muted)]">
             {entry.fromName ? `From ${entry.fromName}` : ""}
             {entry.fromName && entry.toName ? " to " : ""}
             {entry.toName ? entry.toName : ""}
             {entry.actorName ? ` - Posted by ${entry.actorName}` : ""}
           </p>
-          {entry.note ? <p className="mt-1 text-sm">{entry.note}</p> : null}
+          {entry.note ? <p className="mt-2 text-sm leading-7">{entry.note}</p> : null}
         </div>
-        <div className="text-right">
-          <p className={`text-lg font-semibold ${tone}`}>
+        <div className="shrink-0 text-right">
+          <p className={`text-xl font-semibold ${tone}`}>
             {sign}
             {formatBucks(entry.amount)}
           </p>

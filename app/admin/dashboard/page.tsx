@@ -115,7 +115,7 @@ export default async function AdminDashboardPage({ searchParams }: PageProps) {
           <Card title="Kid Balances">
             <div className="grid gap-4 md:grid-cols-2">
               {activeKids.map((kid) => (
-                <div key={kid.id} className="rounded-[1.4rem] border border-[var(--line)] bg-[var(--panel-strong)] p-4">
+                <div key={kid.id} className="rounded-[1.4rem] border border-[var(--line)] bg-[var(--panel-strong)] p-4 shadow-[0_10px_24px_rgba(18,58,104,0.05)]">
                   <div className="flex items-center gap-3">
                     <span
                       className="flex h-12 w-12 items-center justify-center rounded-[1rem] text-lg font-semibold text-white"
@@ -123,9 +123,10 @@ export default async function AdminDashboardPage({ searchParams }: PageProps) {
                     >
                       {kid.avatar}
                     </span>
-                    <div>
-                      <p className="font-semibold">{kid.name}</p>
-                      <p className="text-sm text-[var(--muted)]">{formatBucks(kid.balance)}</p>
+                    <div className="min-w-0">
+                      <p className="font-semibold tracking-tight">{kid.name}</p>
+                      <p className="mt-1 text-sm text-[var(--muted)]">Available balance</p>
+                      <p className="text-lg font-semibold text-[var(--navy)]">{formatBucks(kid.balance)}</p>
                     </div>
                   </div>
                 </div>
@@ -136,12 +137,12 @@ export default async function AdminDashboardPage({ searchParams }: PageProps) {
           <Card title="Quick Balance Changes">
             <div className="grid gap-4 md:grid-cols-2">
               {activeKids.map((kid) => (
-                <form key={kid.id} action={adjustBalanceAction} className="grid gap-3 rounded-[1.4rem] border border-[var(--line)] bg-[var(--panel-strong)] p-4">
+                <form key={kid.id} action={adjustBalanceAction} className="grid gap-3 rounded-[1.4rem] border border-[var(--line)] bg-[var(--panel-strong)] p-4 shadow-[0_10px_24px_rgba(18,58,104,0.05)]">
                   <input type="hidden" name="userId" value={kid.id} />
                   <div className="flex items-center justify-between gap-3">
                     <div>
-                      <p className="font-semibold">{kid.name}</p>
-                      <p className="text-sm text-[var(--muted)]">{formatBucks(kid.balance)}</p>
+                      <p className="font-semibold tracking-tight">{kid.name}</p>
+                      <p className="mt-1 text-sm text-[var(--muted)]">{formatBucks(kid.balance)}</p>
                     </div>
                     <select name="direction" className={inputClass} defaultValue="deposit">
                       <option value="deposit">Deposit</option>
