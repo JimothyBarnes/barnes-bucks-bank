@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f5efe2;
+  --panel: rgba(255, 252, 246, 0.92);
+  --panel-strong: #fffdfa;
+  --ink: #1d2b3d;
+  --muted: #5c6675;
+  --line: rgba(29, 43, 61, 0.12);
+  --gold: #c89f34;
+  --gold-deep: #8a6510;
+  --green: #0e8f5b;
+  --red: #bc4c3c;
+  --navy: #123a68;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background:
+    radial-gradient(circle at top left, rgba(200, 159, 52, 0.2), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(18, 58, 104, 0.16), transparent 35%),
+    linear-gradient(180deg, #f8f3e7 0%, #efe6d0 100%);
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0)),
+    repeating-linear-gradient(
+      90deg,
+      rgba(18, 58, 104, 0.03) 0,
+      rgba(18, 58, 104, 0.03) 1px,
+      transparent 1px,
+      transparent 90px
+    );
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
