@@ -41,6 +41,8 @@ type PageProps = {
   searchParams?: Promise<Record<string, string | string[] | undefined>>;
 };
 
+const isPreviewMode = Boolean(process.env.BARNES_BUCKS_DB_PATH);
+
 const inputClass =
   "w-full rounded-[1rem] border border-[var(--line)] bg-white px-4 py-3 text-[15px] outline-none transition focus:border-[var(--navy)] focus:ring-2 focus:ring-[rgba(18,58,104,0.16)]";
 
@@ -119,11 +121,23 @@ function Shell({
     <main className="min-h-screen px-4 py-6 text-[var(--ink)] sm:px-6 lg:px-10">
       <div className="mx-auto max-w-7xl">
         <header className="mb-6 rounded-[2rem] border border-[var(--line)] bg-[var(--panel)] px-6 py-8 shadow-[0_24px_80px_rgba(18,58,104,0.08)] backdrop-blur">
-          <p className="mb-3 inline-flex rounded-full border border-[rgba(200,159,52,0.3)] bg-[rgba(200,159,52,0.16)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-[var(--gold-deep)]">
-            Barnes Bucks National Bank
-          </p>
+          <div className="mb-3 flex flex-wrap items-center gap-3">
+            <p className="inline-flex rounded-full border border-[rgba(200,159,52,0.3)] bg-[rgba(200,159,52,0.16)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-[var(--gold-deep)]">
+              Barnes Bucks National Bank
+            </p>
+            {isPreviewMode ? (
+              <p className="inline-flex rounded-full border border-[rgba(188,76,60,0.3)] bg-[rgba(188,76,60,0.12)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--red)]">
+                Preview Mode
+              </p>
+            ) : null}
+          </div>
           <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">{title}</h1>
           <p className="mt-3 max-w-3xl text-base text-[var(--muted)] sm:text-lg">{subtitle}</p>
+          {isPreviewMode ? (
+            <div className="mt-5 rounded-2xl border border-[rgba(188,76,60,0.24)] bg-[rgba(188,76,60,0.08)] px-4 py-3 text-sm font-medium text-[var(--red)]">
+              You are using the safe preview database. Changes here do not affect your normal local app or your live Render site.
+            </div>
+          ) : null}
           {message ? (
             <div className="mt-5 rounded-2xl border border-[rgba(14,143,91,0.25)] bg-[rgba(14,143,91,0.1)] px-4 py-3 text-sm font-medium text-[var(--green)]">
               {message}
