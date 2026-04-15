@@ -6,16 +6,16 @@ import { formatBucks, formatDate, titleCase } from "@/lib/format";
 const isPreviewMode = Boolean(process.env.BARNES_BUCKS_DB_PATH);
 
 export const inputClass =
-  "w-full rounded-[1rem] border border-[var(--line)] bg-white px-4 py-3 text-[15px] text-[var(--ink)] shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] outline-none transition placeholder:text-[color:rgba(92,102,117,0.7)] focus:border-[var(--navy)] focus:ring-2 focus:ring-[rgba(18,58,104,0.16)]";
+  "w-full rounded-[1.1rem] border border-[rgba(18,58,104,0.12)] bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(250,246,239,0.92))] px-4 py-3 text-[15px] text-[var(--ink)] shadow-[inset_0_1px_0_rgba(255,255,255,0.82),0_10px_22px_rgba(18,58,104,0.05)] outline-none transition placeholder:text-[color:rgba(92,102,117,0.64)] focus:border-[rgba(18,58,104,0.28)] focus:ring-2 focus:ring-[rgba(18,58,104,0.12)]";
 
 export const primaryButtonClass =
-  "inline-flex items-center justify-center rounded-full bg-[var(--navy)] px-5 py-3 text-sm font-semibold text-white shadow-[0_12px_24px_rgba(18,58,104,0.16)] transition hover:brightness-110";
+  "inline-flex items-center justify-center rounded-full border border-[rgba(10,28,52,0.22)] bg-[linear-gradient(180deg,#163f70,#0d2d52)] px-5 py-3 text-sm font-semibold text-white shadow-[0_16px_34px_rgba(10,28,52,0.22),inset_0_1px_0_rgba(255,255,255,0.14)] transition hover:translate-y-[-1px] hover:brightness-105";
 
 export const secondaryButtonClass =
-  "inline-flex items-center justify-center rounded-full bg-[var(--gold)] px-5 py-3 text-sm font-semibold text-[var(--ink)] shadow-[0_12px_24px_rgba(200,159,52,0.2)] transition hover:brightness-105";
+  "inline-flex items-center justify-center rounded-full border border-[rgba(138,101,16,0.18)] bg-[linear-gradient(180deg,#e0bb5d,#c89f34)] px-5 py-3 text-sm font-semibold text-[var(--ink)] shadow-[0_16px_34px_rgba(200,159,52,0.24),inset_0_1px_0_rgba(255,255,255,0.24)] transition hover:translate-y-[-1px] hover:brightness-105";
 
 export const ghostButtonClass =
-  "inline-flex items-center justify-center rounded-full border border-[var(--line)] bg-white px-5 py-3 text-sm font-semibold text-[var(--ink)] shadow-[0_8px_20px_rgba(18,58,104,0.06)] transition hover:border-[var(--navy)]";
+  "inline-flex items-center justify-center rounded-full border border-[rgba(18,58,104,0.12)] bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(248,243,235,0.9))] px-5 py-3 text-sm font-semibold text-[var(--ink)] shadow-[0_12px_24px_rgba(18,58,104,0.08),inset_0_1px_0_rgba(255,255,255,0.8)] transition hover:border-[rgba(18,58,104,0.22)] hover:translate-y-[-1px]";
 
 export const dangerButtonClass =
   "inline-flex items-center justify-center rounded-full bg-[var(--red)] px-5 py-3 text-sm font-semibold text-white shadow-[0_12px_24px_rgba(188,76,60,0.18)] transition hover:brightness-105";
@@ -28,17 +28,23 @@ export function Shell({
   title,
   subtitle,
   message,
+  compactHeader = false,
 }: {
   children: React.ReactNode;
   title: string;
   subtitle: string;
   message?: string;
+  compactHeader?: boolean;
 }) {
   return (
     <main className="min-h-screen px-4 py-6 text-[var(--ink)] sm:px-6 lg:px-10">
       <div className="mx-auto max-w-7xl">
-        <header className="mb-6 rounded-[2rem] border border-[var(--line)] bg-[var(--panel)] px-6 py-8 shadow-[0_24px_80px_rgba(18,58,104,0.08)] backdrop-blur">
-          <div className="mb-3 flex flex-wrap items-center gap-3">
+        <header
+          className={`mb-6 rounded-[2rem] border border-[var(--line)] bg-[var(--panel)] shadow-[0_24px_80px_rgba(18,58,104,0.08)] backdrop-blur ${
+            compactHeader ? "px-6 py-5" : "px-6 py-8"
+          }`}
+        >
+          <div className={`flex flex-wrap items-center gap-3 ${compactHeader ? "mb-0" : "mb-3"}`}>
             <p className="inline-flex rounded-full border border-[rgba(200,159,52,0.3)] bg-[rgba(200,159,52,0.16)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-[var(--gold-deep)]">
               Barnes Bucks National Bank
             </p>
@@ -48,15 +54,15 @@ export function Shell({
               </p>
             ) : null}
           </div>
-          <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">{title}</h1>
-          <p className="mt-3 max-w-3xl text-base text-[var(--muted)] sm:text-lg">{subtitle}</p>
+          {!compactHeader ? <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">{title}</h1> : null}
+          {!compactHeader ? <p className="mt-3 max-w-3xl text-base text-[var(--muted)] sm:text-lg">{subtitle}</p> : null}
           {isPreviewMode ? (
-            <div className="mt-5 rounded-2xl border border-[rgba(188,76,60,0.24)] bg-[rgba(188,76,60,0.08)] px-4 py-3 text-sm font-medium text-[var(--red)]">
+            <div className={`${compactHeader ? "mt-3" : "mt-5"} rounded-2xl border border-[rgba(188,76,60,0.24)] bg-[rgba(188,76,60,0.08)] px-4 py-3 text-sm font-medium text-[var(--red)]`}>
               You are using the safe preview database. Changes here do not affect your normal local app or your live Render site.
             </div>
           ) : null}
           {message ? (
-            <div className="mt-5 rounded-2xl border border-[rgba(14,143,91,0.25)] bg-[rgba(14,143,91,0.1)] px-4 py-3 text-sm font-medium text-[var(--green)]">
+            <div className={`${compactHeader ? "mt-3" : "mt-5"} rounded-2xl border border-[rgba(14,143,91,0.25)] bg-[rgba(14,143,91,0.1)] px-4 py-3 text-sm font-medium text-[var(--green)]`}>
               {message}
             </div>
           ) : null}
