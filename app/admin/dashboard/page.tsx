@@ -52,6 +52,64 @@ export default async function AdminDashboardPage({ searchParams }: PageProps) {
         <Stat label="Reward Requests" value={String(pendingRewards.length)} detail="Rewards waiting for approval" tone="green" />
       </div>
 
+      <div className="mb-6 grid gap-6 xl:grid-cols-[0.92fr_1.08fr]">
+        <Card title="Daily Actions">
+          <div className="grid gap-4 lg:grid-cols-2">
+            <form action={createTransferAction} className="grid gap-3 rounded-[1.4rem] border border-[var(--line)] bg-[var(--panel-strong)] p-4">
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--muted)]">
+                  Quick Transfer
+                </p>
+              </div>
+              <select name="fromUserId" className={inputClass} defaultValue="">
+                <option value="" disabled>
+                  From account
+                </option>
+                {activeKids.map((kid) => (
+                  <option key={kid.id} value={kid.id}>
+                    {kid.name} - {formatBucks(kid.balance)}
+                  </option>
+                ))}
+              </select>
+              <select name="toUserId" className={inputClass} defaultValue="">
+                <option value="" disabled>
+                  To account
+                </option>
+                {activeKids.map((kid) => (
+                  <option key={kid.id} value={kid.id}>
+                    {kid.name}
+                  </option>
+                ))}
+              </select>
+              <input name="amount" type="number" min="1" className={inputClass} placeholder="Amount" required />
+              <input name="note" className={inputClass} placeholder="Reason" />
+              <button className={primaryButtonClass}>Send Barnes Bucks</button>
+            </form>
+
+            <div className="grid gap-3 rounded-[1.4rem] border border-[var(--line)] bg-[var(--panel-strong)] p-4">
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--muted)]">
+                  Approval Snapshot
+                </p>
+              </div>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <div className="rounded-[1.2rem] bg-[linear-gradient(145deg,rgba(18,58,104,0.08),rgba(255,255,255,0.88))] p-4">
+                  <p className="text-sm text-[var(--muted)]">Jobs waiting</p>
+                  <p className="mt-2 text-3xl font-semibold">{pendingJobs.length}</p>
+                </div>
+                <div className="rounded-[1.2rem] bg-[linear-gradient(145deg,rgba(14,143,91,0.12),rgba(255,255,255,0.88))] p-4">
+                  <p className="text-sm text-[var(--muted)]">Rewards waiting</p>
+                  <p className="mt-2 text-3xl font-semibold">{pendingRewards.length}</p>
+                </div>
+              </div>
+              <p className="text-sm text-[var(--muted)]">
+                Use the Jobs page when you want the full queue and posting tools.
+              </p>
+            </div>
+          </div>
+        </Card>
+      </div>
+
       <div className="grid gap-6 xl:grid-cols-[1.05fr_0.95fr]">
         <div className="grid gap-6">
           <Card title="Kid Balances">
@@ -100,34 +158,6 @@ export default async function AdminDashboardPage({ searchParams }: PageProps) {
         </div>
 
         <div className="grid gap-6">
-          <Card title="Quick Transfer">
-            <form action={createTransferAction} className="grid gap-3">
-              <select name="fromUserId" className={inputClass} defaultValue="">
-                <option value="" disabled>
-                  From account
-                </option>
-                {activeKids.map((kid) => (
-                  <option key={kid.id} value={kid.id}>
-                    {kid.name} - {formatBucks(kid.balance)}
-                  </option>
-                ))}
-              </select>
-              <select name="toUserId" className={inputClass} defaultValue="">
-                <option value="" disabled>
-                  To account
-                </option>
-                {activeKids.map((kid) => (
-                  <option key={kid.id} value={kid.id}>
-                    {kid.name}
-                  </option>
-                ))}
-              </select>
-              <input name="amount" type="number" min="1" className={inputClass} placeholder="Amount" required />
-              <input name="note" className={inputClass} placeholder="Reason" />
-              <button className={primaryButtonClass}>Send Barnes Bucks</button>
-            </form>
-          </Card>
-
           <Card title="Pending Approvals">
             <div className="grid gap-4">
               <div className="grid gap-3">

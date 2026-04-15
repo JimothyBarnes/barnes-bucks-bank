@@ -81,30 +81,52 @@ export function AdminShell({
   activeTab: "dashboard" | "jobs" | "settings";
 }) {
   const navItems = [
-    { href: "/admin/dashboard", label: "Dashboard", key: "dashboard" },
-    { href: "/admin/jobs", label: "Jobs", key: "jobs" },
-    { href: "/admin/settings", label: "Settings", key: "settings" },
+    {
+      href: "/admin/dashboard",
+      label: "Dashboard",
+      detail: "Daily banking",
+      key: "dashboard",
+    },
+    {
+      href: "/admin/jobs",
+      label: "Jobs",
+      detail: "Approvals and posting",
+      key: "jobs",
+    },
+    {
+      href: "/admin/settings",
+      label: "Settings",
+      detail: "Accounts and rewards",
+      key: "settings",
+    },
   ] as const;
 
   return (
     <Shell title={title} subtitle={subtitle} message={message}>
-      <div className="mb-6 flex flex-col gap-4 rounded-[1.5rem] border border-[var(--line)] bg-[var(--panel)] px-4 py-4 shadow-[0_18px_50px_rgba(18,58,104,0.08)] sm:flex-row sm:items-center sm:justify-between">
-        <nav className="flex flex-wrap gap-3">
+      <div className="mb-6 flex flex-col gap-4 rounded-[1.5rem] border border-[var(--line)] bg-[linear-gradient(145deg,rgba(18,58,104,0.06),rgba(255,255,255,0.82))] px-4 py-4 shadow-[0_18px_50px_rgba(18,58,104,0.08)] lg:flex-row lg:items-center lg:justify-between">
+        <nav className="grid gap-3 sm:grid-cols-3">
           {navItems.map((item) => (
             <Link
               key={item.key}
               href={item.href}
-              className={
+              className={`rounded-[1.25rem] border px-4 py-3 transition ${
                 item.key === activeTab
-                  ? primaryButtonClass
-                  : ghostButtonClass
-              }
+                  ? "border-[rgba(18,58,104,0.28)] bg-[var(--navy)] text-white shadow-[0_16px_36px_rgba(18,58,104,0.2)]"
+                  : "border-[var(--line)] bg-white text-[var(--ink)] hover:border-[var(--navy)]"
+              }`}
             >
-              {item.label}
+              <span className="block text-base font-semibold">{item.label}</span>
+              <span
+                className={`mt-1 block text-xs uppercase tracking-[0.18em] ${
+                  item.key === activeTab ? "text-white/75" : "text-[var(--muted)]"
+                }`}
+              >
+                {item.detail}
+              </span>
             </Link>
           ))}
         </nav>
-        <form action={logoutAction}>
+        <form action={logoutAction} className="lg:shrink-0">
           <button className={ghostButtonClass}>Sign Out</button>
         </form>
       </div>

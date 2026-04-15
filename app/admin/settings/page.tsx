@@ -37,6 +37,41 @@ export default async function AdminSettingsPage({ searchParams }: PageProps) {
       subtitle="Manage kid accounts, PINs, account status, and the family rewards catalog."
       message={message}
     >
+      <div className="mb-6 grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
+        <Card title="Administrative Tasks">
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="rounded-[1.25rem] border border-[var(--line)] bg-[var(--panel-strong)] p-4">
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--muted)]">
+                Kid Accounts
+              </p>
+              <p className="mt-3 text-sm text-[var(--muted)]">
+                Add new kid accounts, reset PINs, and archive or restore access when needed.
+              </p>
+            </div>
+            <div className="rounded-[1.25rem] border border-[var(--line)] bg-[var(--panel-strong)] p-4">
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--muted)]">
+                Rewards Catalog
+              </p>
+              <p className="mt-3 text-sm text-[var(--muted)]">
+                Keep the reward list current, hide old items, and add new family incentives.
+              </p>
+            </div>
+          </div>
+        </Card>
+
+        <Card title="Create Kid Account">
+          <form action={createKidAction} className="grid gap-3">
+            <input name="name" className={inputClass} placeholder="Name" required />
+            <input name="pin" type="password" inputMode="numeric" pattern="\d{4,8}" className={inputClass} placeholder="PIN" required />
+            <div className="grid gap-3 sm:grid-cols-[1fr_140px]">
+              <input name="color" type="color" className={`${inputClass} h-12`} defaultValue="#1d4ed8" />
+              <input name="avatar" className={inputClass} placeholder="Icon or initials" defaultValue="BB" required />
+            </div>
+            <button className={primaryButtonClass}>Create Account</button>
+          </form>
+        </Card>
+      </div>
+
       <div className="grid gap-6">
         <Card title="Accounts">
           <div className="grid gap-4">
@@ -110,28 +145,16 @@ export default async function AdminSettingsPage({ searchParams }: PageProps) {
           </div>
         </Card>
 
-        <div className="grid gap-6 xl:grid-cols-2">
-          <Card title="Add Kid Account">
-            <form action={createKidAction} className="grid gap-3">
-              <input name="name" className={inputClass} placeholder="Name" required />
-              <input name="pin" type="password" inputMode="numeric" pattern="\d{4,8}" className={inputClass} placeholder="PIN" required />
-              <div className="grid gap-3 sm:grid-cols-[1fr_140px]">
-                <input name="color" type="color" className={`${inputClass} h-12`} defaultValue="#1d4ed8" />
-                <input name="avatar" className={inputClass} placeholder="Icon or initials" defaultValue="BB" required />
-              </div>
-              <button className={primaryButtonClass}>Create Account</button>
-            </form>
-          </Card>
-
-          <Card title="Rewards Catalog">
-            <form action={createRewardAction} className="grid gap-3">
+        <Card title="Rewards Catalog">
+          <div className="grid gap-6 xl:grid-cols-[0.9fr_1.1fr]">
+            <form action={createRewardAction} className="grid gap-3 rounded-[1.4rem] border border-[var(--line)] bg-[var(--panel-strong)] p-4">
               <input name="title" className={inputClass} placeholder="Pick Friday movie" required />
               <textarea name="description" className={`${inputClass} min-h-24`} placeholder="What the reward means" />
               <input name="cost" type="number" min="1" className={inputClass} placeholder="Cost in Barnes Bucks" required />
               <button className={primaryButtonClass}>Add Reward</button>
             </form>
 
-            <div className="mt-4 grid gap-3">
+            <div className="grid gap-3">
               {rewards.map((reward) => (
                 <div key={reward.id} className="flex items-center justify-between gap-3 rounded-[1.25rem] border border-[var(--line)] bg-[var(--panel-strong)] px-4 py-3">
                   <div>
@@ -150,8 +173,8 @@ export default async function AdminSettingsPage({ searchParams }: PageProps) {
                 </div>
               ))}
             </div>
-          </Card>
-        </div>
+          </div>
+        </Card>
       </div>
     </AdminShell>
   );

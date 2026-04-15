@@ -40,7 +40,26 @@ export default async function AdminJobsPage({ searchParams }: PageProps) {
       subtitle="Post work, review submissions, and keep job and reward approvals moving."
       message={message}
     >
-      <div className="grid gap-6 xl:grid-cols-[0.9fr_1.1fr]">
+      <div className="mb-6">
+        <Card title="Today&apos;s Queue">
+          <div className="grid gap-4 md:grid-cols-3">
+            <div className="rounded-[1.25rem] border border-[var(--line)] bg-[var(--panel-strong)] p-4">
+              <p className="text-sm text-[var(--muted)]">Jobs waiting</p>
+              <p className="mt-2 text-3xl font-semibold">{submittedJobs.length}</p>
+            </div>
+            <div className="rounded-[1.25rem] border border-[var(--line)] bg-[var(--panel-strong)] p-4">
+              <p className="text-sm text-[var(--muted)]">Reward requests</p>
+              <p className="mt-2 text-3xl font-semibold">{pendingRewards.length}</p>
+            </div>
+            <div className="rounded-[1.25rem] border border-[var(--line)] bg-[var(--panel-strong)] p-4">
+              <p className="text-sm text-[var(--muted)]">Open or claimed jobs</p>
+              <p className="mt-2 text-3xl font-semibold">{openJobs.length}</p>
+            </div>
+          </div>
+        </Card>
+      </div>
+
+      <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
         <div className="grid gap-6">
           <Card title="Post New Job">
             <form action={createJobAction} className="grid gap-3">
